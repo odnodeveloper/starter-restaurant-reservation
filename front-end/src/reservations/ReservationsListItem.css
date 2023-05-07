@@ -1,0 +1,15 @@
+.p-bold {
+    font-weight: 600;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  .cancel {
+    color: #ae0a0a;
+  }
+  
+  .cancel:hover {
+    background-color: #eef1f6;
+  }
