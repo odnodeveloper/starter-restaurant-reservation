@@ -131,6 +131,21 @@ function hasValidStatus(req, res, next) {
   });
 }
 
+async function reservationExists(req, res, next) {
+  const reservation_id =
+    req.params.reservation_id || (req.body.data || {}).reservation_id;
+
+  const reservation = await reservationsService.read(reservation_id);
+  if (reservation) {
+    res.locals.reservation = reservation;
+    return next();
+  }
+  next({
+    status: 404,
+    message: `Reservation ${reservation_id} cannot be found.`,
+  });
+}
+
 function isBooked(req, res, next) {
   const { status } = req.body.data;
 
@@ -143,18 +158,14 @@ function isBooked(req, res, next) {
   next();
 }
 
-async function reservationExists(req, res, next) {
-  const reservation_id = req.params.reservation_id || (req.body.data || {}).reservation_id;
-
-  const reservation = await reservationsService.read(reservation_id);
-  if (reservation) {
-    res.locals.reservation = reservation;
-    return next();
+function reservationIsSeated(req, res, next) {
+  if (res.locals.status === "seated") {
+    return next({
+      status: 400,
+      message: `Reservation is already seated`,
+    });
   }
-  next({
-    status: 404,
-    message: `Reservation ${reservation_id} cannot be found.`,
-  });
+  next();
 }
 
 /**
@@ -203,6 +214,7 @@ module.exports = {
     hasValidTime,
     hasValidNumber,
     isBooked,
+    reservationIsSeated,
     asyncErrorBoundary(create),
   ],
   update: [
@@ -213,6 +225,7 @@ module.exports = {
     hasValidNumber,
     reservationExists,
     hasValidStatus,
+    reservationIsSeated,
     asyncErrorBoundary(update),
   ],
   updateStatus: [

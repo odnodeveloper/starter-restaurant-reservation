@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {
   cancelReservation,
-  listReservations,
   finishTable,
+  listReservations,
   listTables,
 } from "../utils/api";
 import useQuery from "../utils/useQuery";
@@ -195,6 +195,7 @@ const Dashboard = ({ date }) => {
           hasTables={!!tables.length}
         />
       </div>
+
       <ErrorAlert error={tablesError} />
       {loadedTables()}
     </main>

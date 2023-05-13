@@ -11,10 +11,10 @@ exports.up = function (knex) {
       .nullable()
       .references("reservation_id")
       .inTable("reservations");
-    table
-      .boolean("occupied")
-      .defaultTo(false)
-      .notNullable();
+    // table
+    // .boolean("occupied")
+    // .defaultTo(false)
+    // .notNullable();
     table.timestamps(true, true);
   });
 };
