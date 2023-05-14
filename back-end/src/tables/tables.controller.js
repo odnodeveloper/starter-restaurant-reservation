@@ -2,28 +2,20 @@ const tablesService = require("./tables.service.js");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const hasProperties = require("../errors/hasProperties");
 const reservationsService = require("../reservations/reservations.service");
-const reservationsController = require("../reservations/reservations.controller")
 
 const hasRequiredProperties = hasProperties("table_name", "capacity");
 const hasReservationId = hasProperties("reservation_id");
-
 
 async function tableExists(req, res, next) {
   const table_id = Number(req.params.table_id);
   const table = await tablesService.read(table_id);
 
-  if (table.reservation_id) {
-    table.reservation = await reservationsService.read(table.reservation_id);
-  }
-
-  if (table.table_id) {
+  if (table) {
     res.locals.table = table;
     return next();
   }
-
   next({ status: 404, message: `Table ${table_id} cannot be found.` });
 }
-
 
 function hasValidName(req, res, next) {
   const table_name = req.body.data.table_name;
@@ -50,9 +42,7 @@ function hasValidCapacity(req, res, next) {
 }
 
 async function reservationExists(req, res, next) {
-  const reservation_id =
-    req.params.reservation_id || (req.body.data || {}).reservation_id;
-
+  const reservation_id = req.params.reservation_id || (req.body.data || {}).reservation_id;
   const reservation = await reservationsService.read(reservation_id);
   if (reservation) {
     res.locals.reservation = reservation;
@@ -89,7 +79,7 @@ function tableIsFree(req, res, next) {
 }
 
 function tableIsOccupied(req, res, next) {
-  if (!res.locals.table.reservation.reservation) {
+  if (!res.locals.table.reservation_id) {
     return next({
       status: 400,
       message: `Table is not occupied`,
@@ -124,7 +114,7 @@ function tableIsNotSeated(req, res, next) {
     return next({
       status: 400,
       message: `Table is already seated`,
-    })
+    });
   }
   next();
 }
@@ -142,6 +132,8 @@ module.exports = {
     hasReservationId,
     reservationExists,
     hasSufficientCapacity,
+
+    tableIsNotSeated,
     tableIsFree,
     asyncErrorBoundary(update),
   ],
