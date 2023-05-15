@@ -9,9 +9,9 @@ const path = require("path");
 
 const {
   DATABASE_URL = "postgres://pxljyyrr:ETLlLUZugRfFgKnfziNsuEvP81LnxstM@kesavan.db.elephantsql.com/pxljyyrr",
-  DATABASE_URL_DEVELOPMENT = "postgres://pxljyyrr:ETLlLUZugRfFgKnfziNsuEvP81LnxstM@kesavan.db.elephantsql.com/pxljyyrr",
-  DATABASE_URL_TEST = "postgres://pxljyyrr:ETLlLUZugRfFgKnfziNsuEvP81LnxstM@kesavan.db.elephantsql.com/pxljyyrr",
-  DATABASE_URL_PREVIEW = "postgres://pxljyyrr:ETLlLUZugRfFgKnfziNsuEvP81LnxstM@kesavan.db.elephantsql.com/pxljyyrr",
+  DATABASE_URL_DEVELOPMENT = "postgres://caatntal:bW7hTHFJRwy6BNzE6E7yNUhMInwX9307@babar.db.elephantsql.com/caatntal",
+  DATABASE_URL_TEST = "postgres://qwblzzzl:mn2Sx2VDa2LQDnFJ62soS-BibFK5vtHx@kesavan.db.elephantsql.com/qwblzzzl",
+  DATABASE_URL_PREVIEW = "postgres://ugziorvo:2n4LWvWYxcvEeG-U_Y2CPzV_dk1vZMoj@kesavan.db.elephantsql.com/ugziorvo",
   DEBUG,
 } = process.env;
 
