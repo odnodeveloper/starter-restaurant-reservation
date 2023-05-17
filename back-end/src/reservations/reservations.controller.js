@@ -38,6 +38,19 @@ function hasOnlyValidProperties(req, res, next) {
   next();
 }
 
+// function hasValidMobileNumber(req, res, next) {
+//   const { data = {} } = req.body;
+//   const mobile_number = data["mobile_number"];
+
+//   if (mobile_number !== Number()) {
+//     next({
+//       status: 400,
+//       message: `Mobile number must be a number.`,
+//     });
+//   }
+//   next();
+// }
+
 function hasValidDate(req, res, next) {
   const { data = {} } = req.body;
   const date = data["reservation_date"];
@@ -220,6 +233,7 @@ module.exports = {
   update: [
     hasOnlyValidProperties,
     hasRequiredProperties,
+    // hasValidMobileNumber
     hasValidDate,
     hasValidTime,
     hasValidNumber,
