@@ -17,7 +17,4 @@ exports.up = function (knex) {
 
 exports.down = function (knex) {
   return knex.schema.dropTable("reservations")
-  // , table => {
-  //   table.dropColumn("status");
-  // });
 };
