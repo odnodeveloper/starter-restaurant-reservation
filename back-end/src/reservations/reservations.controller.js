@@ -42,12 +42,16 @@ function hasValidMobileNumber(req, res, next) {
   const { data = {} } = req.body;
   const mobile_number = data["mobile_number"];
 
-  if (mobile_number !== Number() || mobile_number.length === 10) {
+  // Regular expression pattern for a valid mobile phone number
+  const phoneRegex = /^(\()?\d{3}(\))?[-.\s]?\d{3}[-.\s]?\d{4}$/;
+
+  if (!phoneRegex.test(mobile_number)) {
     next({
       status: 400,
-      message: `Mobile number must be a number.`,
+      message: `Mobile number must be a valid mobile number.`,
     });
   }
+
   next();
 }
 
