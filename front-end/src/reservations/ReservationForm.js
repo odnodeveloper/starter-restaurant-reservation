@@ -65,13 +65,13 @@ const ReservationForm = ({
                             Mobile Number
                         </label>
                         <input
-                            type="tel"
+                            type="number"
                             name="mobile_number"
                             className="form-control"
                             id="mobile_number"
                             autoComplete={"off"}
-                            placeholder={"123-456-7890"}
-                            maxLength={12}
+                            placeholder={"1234567890"}
+                            minLength={10}
                             value={reservation.mobile_number}
                             onChange={handleChange}
                             onKeyDown={handleEnter}
