@@ -220,30 +220,28 @@ async function updateStatus(req, res) {
   res.status(200).json({ data });
 }
 
+const createUpdate = [
+  hasOnlyValidProperties,
+  hasRequiredProperties,
+  hasValidMobileNumber,
+  hasValidDate,
+  hasValidTime,
+  hasValidNumber,
+  reservationIsSeated,
+]
+
 module.exports = {
   list: asyncErrorBoundary(list),
   read: [reservationExists, asyncErrorBoundary(read)],
   create: [
-    hasOnlyValidProperties,
-    hasRequiredProperties,
-    hasValidMobileNumber,
-    hasValidDate,
-    hasValidTime,
-    hasValidNumber,
+    ...createUpdate,
     isBooked,
-    reservationIsSeated,
     asyncErrorBoundary(create),
   ],
   update: [
-    hasOnlyValidProperties,
-    hasRequiredProperties,
-    hasValidMobileNumber,
-    hasValidDate,
-    hasValidTime,
-    hasValidNumber,
+    ...createUpdate,
     reservationExists,
     hasValidStatus,
-    reservationIsSeated,
     asyncErrorBoundary(update),
   ],
   updateStatus: [

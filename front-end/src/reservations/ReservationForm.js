@@ -97,7 +97,7 @@ const ReservationForm = ({
                         />
                     </div>
                     <div className="form-floating mb-3">
-                        <label hmtlFor="reservation_time" className="form-label">
+                        <label htmlFor="reservation_time" className="form-label">
                             Reservation Time
                         </label>
                         <input
