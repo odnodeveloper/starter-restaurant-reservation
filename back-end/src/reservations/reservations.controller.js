@@ -41,7 +41,7 @@ function hasOnlyValidProperties(req, res, next) {
 function hasValidMobileNumber(req, res, next) {
   const { data = {} } = req.body;
   const mobile_number = data["mobile_number"];
-
+  console.log(mobile_number)
   // Regular expression pattern for a valid mobile number
   const phoneRegex = /^(\()?\d{3}(\))?[-.\s]?\d{3}[-.\s]?\d{4}$/;
 
@@ -226,6 +226,7 @@ module.exports = {
   create: [
     hasOnlyValidProperties,
     hasRequiredProperties,
+    hasValidMobileNumber,
     hasValidDate,
     hasValidTime,
     hasValidNumber,
