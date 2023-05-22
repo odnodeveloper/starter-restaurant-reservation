@@ -72,6 +72,7 @@ const ReservationForm = ({
                             autoComplete={"off"}
                             placeholder={"1234567890"}
                             minLength={10}
+                            maxLength={10}
                             value={reservation.mobile_number}
                             onChange={handleChange}
                             onKeyDown={handleEnter}
